@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: 24.x
+        node-version: [24.x]
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
