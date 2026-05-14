@@ -27,6 +27,7 @@ jobs:
 
       - name: Run Duolingo sync
         env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
           DUOLINGO_USERNAME: ${{ secrets.DUOLINGO_USERNAME }}
           DUOLINGO_JWT: ${{ secrets.DUOLINGO_JWT }}
           DUOLINGO_PASSWORD: ${{ secrets.DUOLINGO_PASSWORD }}
