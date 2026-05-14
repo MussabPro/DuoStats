@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eccc68" />
+    <meta name="msapplication-navbutton-color" content="#eccc68" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#eccc68" />
+    <meta
+      name="description"
+      content="Duolingo's Japanese language learning visualizer"
+    />
+
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #f6f6f6;
+        --card-bg: #ffffff;
+        --text-primary: #3c3c3c;
+        --text-secondary: #777777;
+        --border: #e5e5e5;
+        --accent: #ff4b00;
+        --xp: #78c800;
+        --graph-line: #1db0f6;
+        --bar-empty: #e5e5e5;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --page-bg: #121212;
+          --card-bg: #1f1f1f;
+          --text-primary: #ffffff;
+          --text-secondary: #aaaaaa;
+          --border: #3a3a3a;
+          --bar-empty: #3a3a3a;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 48px 16px;
+        font-family: "DIN Round Pro", system-ui, sans-serif;
+        background: var(--page-bg);
+        color: var(--text-primary);
+      }
+
+      .container {
+        max-width: 540px;
+        margin: 0 auto;
+      }
+      .pills {
+        display: flex;
+        gap: 12px;
+      }
+      @media (max-width: 520px) {
+        .pills {
+          flex-direction: column;
+        }
+        .pill {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .duo-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+      }
+
+      .banner-label {
+        color: var(--text-secondary);
+      }
+
+      .card-username {
+        margin: 12px 0 16px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .pill {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 10px;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        font-size: 12px;
+        color: var(--text-primary);
+        width: 100%;
+      }
+
+      .pill-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .pill-flags {
+        display: flex;
+        gap: 4px;
+        margin-top: 2px;
+      }
+
+      .pill-flag {
+        width: 16px;
+        height: 12px;
+      }
+
+      .pill-label {
+        color: var(--text-secondary);
+        font-size: 11px;
+      }
+
+      .pill-value {
+        font-weight: 700;
+      }
+
+      .pill-value.xp {
+        color: var(--xp);
+      }
+
+      .pill-value.streak {
+        color: var(--accent);
+      }
+
+      .globe-text {
+        font-size: 6px;
+        fill: var(--text-secondary);
+        font-family: "DIN Round Pro", system-ui, sans-serif;
+      }
+
+      .chart-section {
+        margin-top: 6px;
+      }
+
+      .chart-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+      }
+
+      .chart-wrapper {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px 20px;
+      }
+
+      .chart-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .chart-legend {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+
+      .legend-left {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--graph-line);
+      }
+
+      .languages-section {
+        border-top: 1px solid var(--border);
+        padding-top: 14px;
+        margin-top: 16px;
+      }
+
+      .languages-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 10px;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 16px;
+      }
+
+      .languages-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .language-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 8px 10px;
+        min-width: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .language-flag {
+        width: 28px;
+        height: 20px;
+      }
+
+      .language-name {
+        font-weight: 600;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .language-xp {
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+
+      .card-footer {
+        margin-top: 16px;
+        font-size: 10px;
+        color: var(--text-secondary);
+        text-align: center;
+      }
+
+      .dashboard {
+        margin-top: 24px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+      }
+
+      .dashboard-header {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 12px;
+      }
+
+      .filter-group label {
+        color: var(--text-secondary);
+      }
+
+      .filter-group input,
+      .filter-group select,
+      .filter-group button {
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-primary);
+        font-family: inherit;
+      }
+
+      .filter-actions {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+      }
+
+      .filter-actions button {
+        cursor: pointer;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .summary-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 12px;
+      }
+
+      .summary-value {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+
+      th,
+      td {
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+      }
+
+      th {
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          padding: 32px 12px;
+        }
+
+        .stats-row {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .filters,
+        .summary {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- Title -->
+    <title>DuoStats</title>
+  </head>
+
+  <body>
+    <main class="container">
+      <h1 class="title">DuoStats</h1>
+      <section class="profile">
+        <div class="pills">
+          <div class="pill">
+            <img class="pill-icon" src="Images/Streak.svg" alt="Streak" />
+            <div>
+              <div class="pill-label">Streak</div>
+              <div class="pill-value streak" id="profile-streak">0 days</div>
+            </div>
+          </div>
+          <div class="pill">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M13 2 4 13h6l-1 9 9-11h-6l1-9z" fill="var(--xp)" />
+            </svg>
+            <div>
+              <div class="pill-label">Total XP</div>
+              <div class="pill-value xp" id="profile-xp">0</div>
+            </div>
+          </div>
+          <div class="pill">
+            <img class="pill-icon" src="Images/Languages.svg" alt="Languages" />
+            <div>
+              <div class="pill-label">Languages</div>
+              <div class="pill-flags" id="profile-language-flags"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-section">
+          <div class="chart-title">Last 7 days</div>
+          <div class="chart-wrapper">
+            <svg
+              class="chart-svg"
+              viewBox="0 0 360 180"
+              role="img"
+              aria-label="Weekly XP trend"
+            >
+              <g stroke="var(--bar-empty)" stroke-width="1">
+                <line x1="40" y1="140" x2="340" y2="140" />
+                <line x1="40" y1="100" x2="340" y2="100" />
+                <line x1="40" y1="60" x2="340" y2="60" />
+                <line x1="40" y1="20" x2="340" y2="20" />
+              </g>
+              <g fill="var(--text-secondary)" font-size="10">
+                <text x="10" y="144">0</text>
+                <text x="6" y="104">300</text>
+                <text x="6" y="64">600</text>
+                <text x="6" y="24">900</text>
+              </g>
+              <polyline
+                id="weekly-line"
+                fill="none"
+                stroke="var(--graph-line)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></polyline>
+              <g id="weekly-dots" fill="var(--graph-line)"></g>
+              <g
+                id="weekly-labels"
+                fill="var(--text-secondary)"
+                font-size="10"
+              ></g>
+            </svg>
+            <div class="chart-legend">
+              <div class="legend-left">
+                <span class="legend-dot"></span>
+                <span id="legend-username">username</span>
+              </div>
+              <div id="legend-total">0 XP</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="languages-section">
+          <div class="languages-title">Languages</div>
+          <div class="languages-list" id="languages-list"></div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <div class="dashboard-header">Stats Explorer</div>
+        <div class="filters">
+          <div class="filter-group">
+            <label for="filter-start">Start date</label>
+            <input type="date" id="filter-start" />
+          </div>
+          <div class="filter-group">
+            <label for="filter-end">End date</label>
+            <input type="date" id="filter-end" />
+          </div>
+          <div class="filter-group">
+            <label for="filter-language">Language</label>
+            <select id="filter-language"></select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-min-xp">Min XP</label>
+            <input type="number" id="filter-min-xp" min="0" placeholder="0" />
+          </div>
+          <div class="filter-group">
+            <label for="filter-max-xp">Max XP</label>
+            <input type="number" id="filter-max-xp" min="0" placeholder="900" />
+          </div>
+          <div class="filter-group filter-actions">
+            <button id="filter-reset" type="button">Reset filters</button>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="summary-card">
+            <div>Total days</div>
+            <div class="summary-value" id="summary-days">0</div>
+          </div>
+          <div class="summary-card">
+            <div>Total XP</div>
+            <div class="summary-value" id="summary-total-xp">0</div>
+          </div>
+          <div class="summary-card">
+            <div>Average XP</div>
+            <div class="summary-value" id="summary-average-xp">0</div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>XP</th>
+                <th>Sessions</th>
+                <th>Minutes</th>
+                <th>Streak</th>
+              </tr>
+            </thead>
+            <tbody id="stats-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Personal Script -->
+    <script defer type="text/javascript">
+      /**
+       * @typedef Entry
+       * @type {object}
+       * @property {number} number_of_sessions
+       * @property {number} session_time
+       * @property {number} streak
+       * @property {number} xp_today
+       *
+       * @typedef Data
+       * @type {Object.<string, Entry>}
+       */
+
+      async function getJson(path) {
+        const response = await fetch(`data/${path}`);
+        if (!response.ok) return null;
+        return response.json();
+      }
+
+      function parseDateKey(key) {
+        const [year, month, day] = key.split("/").map(Number);
+        return new Date(year, month - 1, day);
+      }
+
+      function getWeeklyData(data, days) {
+        const sortedDates = Object.keys(data).sort(
+          (a, b) => parseDateKey(a) - parseDateKey(b),
+        );
+        const recentDates = sortedDates.slice(-days);
+        const values = recentDates.map((date) => data[date]);
+
+        return { dates: recentDates, values };
+      }
+
+      function renderLanguagesList(languages, selected) {
+        const languagesListElement = document.getElementById("languages-list");
+        if (!languagesListElement) return;
+
+        const filteredLanguages =
+          selected && selected !== "all"
+            ? languages.filter(
+                (language) =>
+                  language.code === selected || language.name === selected,
+              )
+            : languages;
+
+        const preferredOrder = ["Japanese", "English"];
+        const sortedLanguages = [...filteredLanguages]
+          .sort((a, b) => {
+            const aIndex = preferredOrder.indexOf(a.name || "");
+            const bIndex = preferredOrder.indexOf(b.name || "");
+            if (aIndex !== -1 || bIndex !== -1) {
+              return (
+                (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex)
+              );
+            }
+            return Number(b.xp || 0) - Number(a.xp || 0);
+          })
+          .slice(0, 5);
+
+        languagesListElement.innerHTML = sortedLanguages
+          .map((language) => {
+            const name = language.name || "Unknown";
+            const xp = Number(language.xp || 0).toLocaleString();
+            const level = Number(language.level || 0);
+            const fileName = `${name.replace(/\s+/g, "")}.svg`;
+            return `
+              <div class="language-card">
+                <img
+                  class="language-flag"
+                  src="Images/${fileName}"
+                  alt="${name} flag"
+                  loading="lazy"
+                />
+                <div>
+                  <div class="language-name">${name}</div>
+                  <div class="language-xp">Level ${level}</div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderProfile(profile) {
+        if (!profile) return null;
+
+        const usernameElement = document.getElementById("profile-username");
+        const xpElement = document.getElementById("profile-xp");
+        const streakElement = document.getElementById("profile-streak");
+        const languageFlagsElement = document.getElementById(
+          "profile-language-flags",
+        );
+        const legendUsernameElement =
+          document.getElementById("legend-username");
+
+        const username = profile.username || "username";
+
+        if (usernameElement) {
+          usernameElement.textContent = `@${username}`;
+        }
+
+        if (legendUsernameElement) {
+          legendUsernameElement.textContent = username;
+        }
+
+        const languages = Array.isArray(profile.languages)
+          ? profile.languages
+          : [];
+        const activeLanguages = languages.filter(
+          (language) => Number(language.xp || 0) > 0,
+        );
+
+        if (xpElement) {
+          xpElement.textContent = Number(
+            profile.total_xp || 0,
+          ).toLocaleString();
+        }
+
+        if (streakElement) {
+          const streakValue = Number(profile.streak || 0);
+          streakElement.textContent = `${streakValue} day${
+            streakValue === 1 ? "" : "s"
+          }`;
+        }
+
+        if (languageFlagsElement) {
+          const orderedLanguages = [...activeLanguages].sort((a, b) => {
+            const preferredOrder = ["Japanese", "English"];
+            const aIndex = preferredOrder.indexOf(a.name || "");
+            const bIndex = preferredOrder.indexOf(b.name || "");
+            return (
+              (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex)
+            );
+          });
+          languageFlagsElement.innerHTML = orderedLanguages
+            .slice(0, 2)
+            .map((language) => {
+              const name = language.name || "Unknown";
+              const fileName = `${name.replace(/\s+/g, "")}.svg`;
+              return `<img class="pill-flag" src="Images/${fileName}" alt="${name} flag" />`;
+            })
+            .join("");
+        }
+
+        renderLanguagesList(activeLanguages, "all");
+
+        return null;
+      }
+
+      function renderWeeklyGraph(data) {
+        const lineElement = document.getElementById("weekly-line");
+        const dotsElement = document.getElementById("weekly-dots");
+        const labelsElement = document.getElementById("weekly-labels");
+        const legendTotalElement = document.getElementById("legend-total");
+
+        if (!lineElement || !dotsElement || !labelsElement) return null;
+
+        const weeklyData = getWeeklyData(data, 7);
+        const values = weeklyData.values.map((value) => value.xp_today || 0);
+        const maxValue = 900;
+        const chart = {
+          left: 40,
+          right: 340,
+          top: 20,
+          bottom: 140,
+        };
+        const step = (chart.right - chart.left) / 6;
+        const points = values.map((value, index) => {
+          const clamped = Math.min(value, maxValue);
+          const ratio = maxValue ? clamped / maxValue : 0;
+          const x = chart.left + step * index;
+          const y = chart.bottom - ratio * (chart.bottom - chart.top);
+          return { x, y };
+        });
+
+        lineElement.setAttribute(
+          "points",
+          points.map((point) => `${point.x},${point.y}`).join(" "),
+        );
+
+        dotsElement.innerHTML = points
+          .map(
+            (point) =>
+              `<circle cx="${point.x}" cy="${point.y}" r="3.5"></circle>`,
+          )
+          .join("");
+
+        labelsElement.innerHTML = weeklyData.dates
+          .map((date, index) => {
+            const dayLabel = parseDateKey(date)
+              .toLocaleDateString("en-US", { weekday: "short" })
+              .charAt(0);
+            const x = chart.left + step * index;
+            return `<text x="${x}" y="166" text-anchor="middle">${dayLabel}</text>`;
+          })
+          .join("");
+
+        if (legendTotalElement) {
+          const total = values.reduce((sum, value) => sum + value, 0);
+          legendTotalElement.textContent = `${total.toLocaleString()} XP`;
+        }
+
+        return null;
+      }
+
+      function buildProgressRows(data) {
+        return Object.entries(data)
+          .map(([date, entry]) => ({
+            date,
+            xp_today: Number(entry.xp_today || 0),
+            number_of_sessions: Number(entry.number_of_sessions || 0),
+            session_time: Number(entry.session_time || 0),
+            streak: Number(entry.streak || 0),
+          }))
+          .sort((a, b) => parseDateKey(a.date) - parseDateKey(b.date));
+      }
+
+      function formatDate(dateStr) {
+        const [year, month, day] = dateStr.split("/").map(Number);
+        const date = new Date(year, month - 1, day);
+        return date.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      }
+
+      function renderTable(rows) {
+        const tableBody = document.getElementById("stats-table-body");
+        if (!tableBody) return;
+
+        tableBody.innerHTML = rows
+          .map((row) => {
+            const minutes = Math.round(row.session_time / 60);
+            return `
+              <tr>
+                <td>${formatDate(row.date)}</td>
+                <td>${row.xp_today}</td>
+                <td>${row.number_of_sessions}</td>
+                <td>${minutes}</td>
+                <td>${row.streak}</td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function renderSummary(rows) {
+        const daysElement = document.getElementById("summary-days");
+        const totalXpElement = document.getElementById("summary-total-xp");
+        const averageXpElement = document.getElementById("summary-average-xp");
+        const totalXp = rows.reduce((sum, row) => sum + row.xp_today, 0);
+        const averageXp = rows.length ? totalXp / rows.length : 0;
+
+        if (daysElement) daysElement.textContent = rows.length.toString();
+        if (totalXpElement)
+          totalXpElement.textContent = totalXp.toLocaleString();
+        if (averageXpElement)
+          averageXpElement.textContent = Math.round(averageXp).toString();
+      }
+
+      function setupFilters(rows, profile) {
+        const startInput = document.getElementById("filter-start");
+        const endInput = document.getElementById("filter-end");
+        const minXpInput = document.getElementById("filter-min-xp");
+        const maxXpInput = document.getElementById("filter-max-xp");
+        const languageSelect = document.getElementById("filter-language");
+        const resetButton = document.getElementById("filter-reset");
+
+        if (languageSelect) {
+          const languages = Array.isArray(profile?.languages)
+            ? profile.languages
+            : [];
+          const activeLanguages = languages.filter(
+            (language) => Number(language.xp || 0) > 0,
+          );
+          const options = [
+            { value: "all", label: "All languages" },
+            ...activeLanguages.map((language) => ({
+              value: language.code || language.name || "",
+              label: language.name || "Unknown",
+            })),
+          ];
+          languageSelect.innerHTML = options
+            .map(
+              (option) =>
+                `<option value="${option.value}">${option.label}</option>`,
+            )
+            .join("");
+        }
+
+        const applyFilters = () => {
+          let filtered = [...rows];
+
+          if (startInput?.value) {
+            const startDate = new Date(startInput.value);
+            filtered = filtered.filter(
+              (row) => parseDateKey(row.date) >= startDate,
+            );
+          }
+
+          if (endInput?.value) {
+            const endDate = new Date(endInput.value);
+            filtered = filtered.filter(
+              (row) => parseDateKey(row.date) <= endDate,
+            );
+          }
+
+          const minXp = Number(minXpInput?.value || 0);
+          if (minXp) {
+            filtered = filtered.filter((row) => row.xp_today >= minXp);
+          }
+
+          const maxXp = Number(maxXpInput?.value || 0);
+          if (maxXp) {
+            filtered = filtered.filter((row) => row.xp_today <= maxXp);
+          }
+
+          renderTable(filtered);
+          renderSummary(filtered);
+        };
+
+        startInput?.addEventListener("change", applyFilters);
+        endInput?.addEventListener("change", applyFilters);
+        minXpInput?.addEventListener("input", applyFilters);
+        maxXpInput?.addEventListener("input", applyFilters);
+
+        languageSelect?.addEventListener("change", () => {
+          const languages = Array.isArray(profile?.languages)
+            ? profile.languages
+            : [];
+          const activeLanguages = languages.filter(
+            (language) => Number(language.xp || 0) > 0,
+          );
+          renderLanguagesList(activeLanguages, languageSelect.value);
+        });
+
+        resetButton?.addEventListener("click", () => {
+          if (startInput) startInput.value = "";
+          if (endInput) endInput.value = "";
+          if (minXpInput) minXpInput.value = "";
+          if (maxXpInput) maxXpInput.value = "";
+          if (languageSelect) languageSelect.value = "all";
+          applyFilters();
+          const languages = Array.isArray(profile?.languages)
+            ? profile.languages
+            : [];
+          const activeLanguages = languages.filter(
+            (language) => Number(language.xp || 0) > 0,
+          );
+          renderLanguagesList(activeLanguages, "all");
+        });
+
+        applyFilters();
+      }
+
+      /**
+       * Bootstraps the whole DOM and renders the graphs for you. These functions are
+       * not pure and side effects are to be expected: network JSON request and several DOM rendering
+       * processes. We make sure that `data` exists to prevent unwanted errors.
+       */
+      async function bootstrap() {
+        const [progressData, profileData] = await Promise.all([
+          getJson("duolingo-progress.json"),
+          getJson("profile.json"),
+        ]);
+
+        if (!progressData) return null;
+
+        const rows = buildProgressRows(progressData);
+
+        renderProfile(profileData);
+        renderWeeklyGraph(progressData);
+        renderTable(rows);
+        renderSummary(rows);
+        setupFilters(rows, profileData);
+
+        return null;
+      }
+
+      /**
+       * Runner.
+       */
+      bootstrap()
+        .then(() => {
+          console.log("Website has finished rendering your Duolingo data.");
+        })
+        .catch((err) => {
+          console.error("An error ocurred. Please refresh the page!");
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>

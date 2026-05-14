@@ -1,0 +1,69 @@
+[project]
+authors = [
+    {name = "lauslim12", email = "31909304+lauslim12@users.noreply.github.com"},
+]
+license = {text = "MIT"}
+requires-python = "<4.0,>=3.12"
+dependencies = [
+    "requests<3.0.0,>=2.32.3",
+    "pydantic<3.0.0,>=2.7.4",
+]
+name = "japanese-duolingo-visualizer"
+version = "1.0.0"
+description = "Visualize your Japanese learning process with the help of Duolingo's API"
+readme = "README.md"
+package-mode = false
+keywords = [
+    "automation",
+    "duolingo",
+    "github-actions",
+    "http",
+    "visualizer",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: No Input/Output (Daemon)",
+    "Environment :: Web Environment",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation",
+    "Topic :: Database",
+    "Topic :: Education",
+    "Topic :: Internet",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+
+[project.urls]
+homepage = "https://github.com/lauslim12/japanese-duolingo-visualizer"
+repository = "https://github.com/lauslim12/japanese-duolingo-visualizer"
+documentation = "https://github.com/lauslim12/japanese-duolingo-visualizer"
+
+[dependency-groups]
+dev = [
+    "mypy<2.0.0,>=1.10.0",
+    "pytest<9.0.0,>=8.2.2",
+    "requests-mock<2.0.0,>=1.12.1",
+    "types-requests<3.0.0.0,>=2.32.0.20240602",
+    "pytest-cov<6.0.0,>=5.0.0",
+    "ruff<1.0.0,>=0.4.9",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.mypy]
+strict = "True"
+files = ["src"]
+
+[tool.pdm.build]
+includes = []

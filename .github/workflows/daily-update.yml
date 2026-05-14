@@ -1,0 +1,52 @@
+name: Daily Duolingo Sync
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "requests>=2.32.3,<3.0.0" "pydantic>=2.7.4,<3.0.0"
+
+      - name: Run Duolingo sync
+        env:
+          DUOLINGO_USERNAME: ${{ secrets.DUOLINGO_USERNAME }}
+          DUOLINGO_JWT: ${{ secrets.DUOLINGO_JWT }}
+          DUOLINGO_PASSWORD: ${{ secrets.DUOLINGO_PASSWORD }}
+        run: python main.py
+
+      - name: Copy data for GitHub Pages
+        run: |
+          mkdir -p web/data
+          cp data/duolingo-progress.json data/profile.json data/statistics.json web/data/
+
+      - name: Commit updated data
+        env:
+          GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME }}
+          GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
+        run: |
+          git config user.name "$GIT_AUTHOR_NAME"
+          git config user.email "$GIT_AUTHOR_EMAIL"
+          git add data/duolingo-progress.json data/profile.json data/statistics.json web/data/duolingo-progress.json web/data/profile.json web/data/statistics.json web/card.svg
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update duolingo stats"
+          git push
