@@ -126,8 +126,8 @@ def write_card_svg(
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">',
         '<rect x="0.5" y="0.5" width="599" height="299" rx="16" fill="#1F1F1F" stroke="#3A3A3A" />',
-        '<text x="36" y="34" fill="#AAAAAA" font-size="12" font-family="DIN Round Pro, system-ui, sans-serif">DuoStats</text>',
-        f'<text x="36" y="70" fill="#FFFFFF" font-size="20" font-family="DIN Round Pro, system-ui, sans-serif">@{username}</text>',
+        '<text x="20" y="34" fill="#AAAAAA" font-size="12" font-family="DIN Round Pro, system-ui, sans-serif">DuoStats</text>',
+        f'<text x="20" y="70" fill="#FFFFFF" font-size="20" font-family="DIN Round Pro, system-ui, sans-serif">@{username}</text>',
     ]
 
     svg_lines.append(create_svg_group(
