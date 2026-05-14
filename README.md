@@ -1,5 +1,9 @@
 # DuoStats
 
+<p align="center">
+  <img src="web/card.svg" alt="DuoStats Card" />
+</p>
+
 Duolingo progress visualizer with a daily-updated profile card, weekly chart, and stats explorer. Built with Python, GitHub Actions, and a static web UI.
 
 Forked from https://github.com/lauslim12/japanese-duolingo-visualizer.
