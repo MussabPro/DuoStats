@@ -2,6 +2,8 @@ from datetime import datetime
 from os import environ, path
 from traceback import format_exc
 import json
+import re
+import xml.etree.ElementTree as ET
 from typing import Any
 
 from pydantic import ValidationError
@@ -16,6 +18,25 @@ from src.api import (
 from src.database import Database
 from src.schema import DatabaseEntry, Summary, User
 from src.synchronizer import check_database_change, sync_database_with_summaries
+
+
+def create_svg_group(file_path: str, x: int, y: int, width: int, height: int) -> str:
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        original_width_str = root.get("width", "1")
+        original_height_str = root.get("height", "1")
+        original_width = float(re.sub(r"px$", "", original_width_str))
+        original_height = float(re.sub(r"px$", "", original_height_str))
+        scale_x = width / original_width if original_width else 1
+        scale_y = height / original_height if original_height else 1
+        group = ET.Element(
+            "g", {"transform": f"translate({x}, {y}) scale({scale_x}, {scale_y})"})
+        for child in root:
+            group.append(child)
+        return ET.tostring(group, encoding="unicode")
+    except Exception as e:
+        return f"<!-- Error loading {file_path}: {e} -->"
 
 
 def log(message: str) -> None:
@@ -109,9 +130,8 @@ def write_card_svg(
         f'<text x="36" y="70" fill="#FFFFFF" font-size="20" font-family="DIN Round Pro, system-ui, sans-serif">@{username}</text>',
     ]
 
-    svg_lines.append(
-        '<image href="Images/Streak.svg" x="23" y="86" width="23" height="23" />'
-    )
+    svg_lines.append(create_svg_group(
+        path.join("web", "Images", "Streak.svg"), 23, 86, 23, 23))
 
     stats = [
         (36, "Streak", f"{streak} days", "#FF4B00", "flame"),
@@ -131,7 +151,8 @@ def write_card_svg(
             )
         elif icon == "globe":
             svg_lines.append(
-                '<image href="Images/Languages.svg" x="415" y="85" width="30" height="30" />'
+                create_svg_group(
+                    path.join("web", "Images", "Languages.svg"), 415, 85, 30, 30)
             )
         svg_lines.append(
             f'<text x="{452 if label == "Languages" else x+14}" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">{label}</text>'
@@ -158,7 +179,8 @@ def write_card_svg(
             file_name = name.replace(" ", "") + ".svg"
             x = start_x + index * 30
             svg_lines.append(
-                f'<image href="Images/{file_name}" x="{x}" y="{y}" width="25" height="15" />'
+                create_svg_group(
+                    path.join("web", "Images", file_name), x, y, 25, 15)
             )
 
     svg_lines.extend(
