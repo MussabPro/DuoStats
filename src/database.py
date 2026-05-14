@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from json import dump, load
+from os import path
 from typing import Any
 
 from pydantic import JsonValue
@@ -10,6 +11,8 @@ class Database:
     filename: str
 
     def get(self) -> Any:
+        if not path.exists(self.filename):
+            return {}
         with open(self.filename, "r", encoding="UTF-8") as file:
             return load(file)
 
