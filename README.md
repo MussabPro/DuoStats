@@ -15,10 +15,9 @@ Forked from https://github.com/lauslim12/japanese-duolingo-visualizer.
    - `GIT_AUTHOR_EMAIL`
    - Optional: `DUOLINGO_PASSWORD`
 4) Enable GitHub Pages:
-   - Settings -> Pages -> Source = Deploy from a branch
-   - Branch = `main`, Folder = `/web`
+   - Settings -> Pages -> Source = GitHub Actions
 
-The workflow runs daily and updates the data files plus web/card.svg.
+The workflow deploys the static site automatically on each commit and updates the data files plus web/card.svg.
 
 ## Local Setup
 
