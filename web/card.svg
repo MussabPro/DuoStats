@@ -10,7 +10,7 @@
 <text x="250" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">Total XP</text>
 <text x="250" y="108" fill="#FFFFFF" font-size="12" font-family="DIN Round Pro, system-ui, sans-serif">12640</text>
 <image href="Images/Languages.svg" x="415" y="85" width="30" height="30" />
-<text x="464" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">Languages</text>
+<text x="452" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">Languages</text>
 <image href="Images/Japanese.svg" x="450" y="100" width="25" height="15" />
 <image href="Images/English.svg" x="480" y="100" width="25" height="15" />
 <g stroke="#3A3A3A" stroke-width="1">

@@ -134,7 +134,7 @@ def write_card_svg(
                 '<image href="Images/Languages.svg" x="415" y="85" width="30" height="30" />'
             )
         svg_lines.append(
-            f'<text x="{452 if label == "Language" else x+14}" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">{label}</text>'
+            f'<text x="{452 if label == "Languages" else x+14}" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">{label}</text>'
         )
         if value:
             svg_lines.append(
