@@ -152,7 +152,7 @@ def write_card_svg(
         elif icon == "globe":
             svg_lines.append(
                 create_svg_group(
-                    path.join("web", "Images", "Languages.svg"), 415, 85, 30, 30)
+                    path.join("web", "Images", "Languages.svg"), 415, 85, 800, 800)
             )
         svg_lines.append(
             f'<text x="{452 if label == "Languages" else x+14}" y="92" fill="#AAAAAA" font-size="10" font-family="DIN Round Pro, system-ui, sans-serif">{label}</text>'
@@ -172,7 +172,7 @@ def write_card_svg(
                 else 99
             ),
         )
-        start_x = 450
+        start_x = 452
         y = 100
         for index, language in enumerate(ordered[:2]):
             name = language.get("name", "Unknown")
@@ -180,7 +180,8 @@ def write_card_svg(
             x = start_x + index * 30
             svg_lines.append(
                 create_svg_group(
-                    path.join("web", "Images", file_name), x, y, 25, 15)
+                    path.join("web", "Images", file_name), x, y, 25, 15
+                )
             )
 
     svg_lines.extend(
