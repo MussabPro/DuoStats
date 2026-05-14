@@ -50,6 +50,17 @@ jobs:
           mkdir -p web/data
           cp data/duolingo-progress.json data/profile.json data/statistics.json web/data/
 
+      - name: Show generated files and git status
+        run: |
+          echo "=== web directory ==="
+          ls -la web || true
+          echo "\n=== head of web/card.svg ==="
+          sed -n '1,60p' web/card.svg || true
+          echo "\n=== git status (porcelain) ==="
+          git status --porcelain || true
+          echo "\n=== git diff for web/card.svg ==="
+          git --no-pager diff -- web/card.svg || true
+
       - name: Commit updated data
         env:
           GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME }}
