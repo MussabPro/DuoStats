@@ -1,0 +1,818 @@
+{
+  "2025/12/30": {
+    "number_of_sessions": 1,
+    "session_time": 190,
+    "streak": 1,
+    "xp_today": 25
+  },
+  "2025/12/31": {
+    "number_of_sessions": 3,
+    "session_time": 574,
+    "streak": 2,
+    "xp_today": 79
+  },
+  "2026/01/01": {
+    "number_of_sessions": 5,
+    "session_time": 735,
+    "streak": 3,
+    "xp_today": 150
+  },
+  "2026/01/02": {
+    "number_of_sessions": 3,
+    "session_time": 610,
+    "streak": 4,
+    "xp_today": 89
+  },
+  "2026/01/03": {
+    "number_of_sessions": 12,
+    "session_time": 1591,
+    "streak": 5,
+    "xp_today": 468
+  },
+  "2026/01/04": {
+    "number_of_sessions": 7,
+    "session_time": 685,
+    "streak": 6,
+    "xp_today": 177
+  },
+  "2026/01/05": {
+    "number_of_sessions": 7,
+    "session_time": 1691,
+    "streak": 7,
+    "xp_today": 303
+  },
+  "2026/01/06": {
+    "number_of_sessions": 8,
+    "session_time": 1855,
+    "streak": 8,
+    "xp_today": 237
+  },
+  "2026/01/07": {
+    "number_of_sessions": 8,
+    "session_time": 1904,
+    "streak": 9,
+    "xp_today": 331
+  },
+  "2026/01/08": {
+    "number_of_sessions": 1,
+    "session_time": 104,
+    "streak": 10,
+    "xp_today": 60
+  },
+  "2026/01/09": {
+    "number_of_sessions": 4,
+    "session_time": 0,
+    "streak": 11,
+    "xp_today": 57
+  },
+  "2026/01/10": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 12,
+    "xp_today": 45
+  },
+  "2026/01/11": {
+    "number_of_sessions": 4,
+    "session_time": 0,
+    "streak": 13,
+    "xp_today": 57
+  },
+  "2026/01/12": {
+    "number_of_sessions": 9,
+    "session_time": 675,
+    "streak": 14,
+    "xp_today": 291
+  },
+  "2026/01/13": {
+    "number_of_sessions": 1,
+    "session_time": 107,
+    "streak": 15,
+    "xp_today": 60
+  },
+  "2026/01/14": {
+    "number_of_sessions": 1,
+    "session_time": 218,
+    "streak": 16,
+    "xp_today": 10
+  },
+  "2026/01/15": {
+    "number_of_sessions": 1,
+    "session_time": 247,
+    "streak": 17,
+    "xp_today": 45
+  },
+  "2026/01/16": {
+    "number_of_sessions": 3,
+    "session_time": 514,
+    "streak": 18,
+    "xp_today": 79
+  },
+  "2026/01/17": {
+    "number_of_sessions": 1,
+    "session_time": 275,
+    "streak": 19,
+    "xp_today": 75
+  },
+  "2026/01/18": {
+    "number_of_sessions": 1,
+    "session_time": 179,
+    "streak": 20,
+    "xp_today": 25
+  },
+  "2026/01/19": {
+    "number_of_sessions": 1,
+    "session_time": 173,
+    "streak": 21,
+    "xp_today": 30
+  },
+  "2026/01/20": {
+    "number_of_sessions": 18,
+    "session_time": 1812,
+    "streak": 22,
+    "xp_today": 430
+  },
+  "2026/01/21": {
+    "number_of_sessions": 4,
+    "session_time": 441,
+    "streak": 23,
+    "xp_today": 435
+  },
+  "2026/01/22": {
+    "number_of_sessions": 1,
+    "session_time": 439,
+    "streak": 24,
+    "xp_today": 75
+  },
+  "2026/01/23": {
+    "number_of_sessions": 1,
+    "session_time": 205,
+    "streak": 25,
+    "xp_today": 23
+  },
+  "2026/01/24": {
+    "number_of_sessions": 1,
+    "session_time": 245,
+    "streak": 26,
+    "xp_today": 25
+  },
+  "2026/01/25": {
+    "number_of_sessions": 1,
+    "session_time": 183,
+    "streak": 27,
+    "xp_today": 30
+  },
+  "2026/01/26": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 28,
+    "xp_today": 45
+  },
+  "2026/01/27": {
+    "number_of_sessions": 10,
+    "session_time": 0,
+    "streak": 29,
+    "xp_today": 250
+  },
+  "2026/01/28": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 30,
+    "xp_today": 39
+  },
+  "2026/01/29": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 31,
+    "xp_today": 15
+  },
+  "2026/01/30": {
+    "number_of_sessions": 1,
+    "session_time": 165,
+    "streak": 32,
+    "xp_today": 23
+  },
+  "2026/01/31": {
+    "number_of_sessions": 1,
+    "session_time": 213,
+    "streak": 33,
+    "xp_today": 25
+  },
+  "2026/02/01": {
+    "number_of_sessions": 1,
+    "session_time": 430,
+    "streak": 34,
+    "xp_today": 25
+  },
+  "2026/02/02": {
+    "number_of_sessions": 1,
+    "session_time": 242,
+    "streak": 35,
+    "xp_today": 27
+  },
+  "2026/02/03": {
+    "number_of_sessions": 1,
+    "session_time": 99,
+    "streak": 36,
+    "xp_today": 20
+  },
+  "2026/02/04": {
+    "number_of_sessions": 1,
+    "session_time": 259,
+    "streak": 37,
+    "xp_today": 23
+  },
+  "2026/02/05": {
+    "number_of_sessions": 1,
+    "session_time": 191,
+    "streak": 38,
+    "xp_today": 23
+  },
+  "2026/02/06": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 39,
+    "xp_today": 0
+  },
+  "2026/02/07": {
+    "number_of_sessions": 2,
+    "session_time": 807,
+    "streak": 40,
+    "xp_today": 68
+  },
+  "2026/02/08": {
+    "number_of_sessions": 1,
+    "session_time": 217,
+    "streak": 41,
+    "xp_today": 45
+  },
+  "2026/02/09": {
+    "number_of_sessions": 1,
+    "session_time": 161,
+    "streak": 42,
+    "xp_today": 35
+  },
+  "2026/02/10": {
+    "number_of_sessions": 1,
+    "session_time": 269,
+    "streak": 43,
+    "xp_today": 23
+  },
+  "2026/02/11": {
+    "number_of_sessions": 1,
+    "session_time": 160,
+    "streak": 44,
+    "xp_today": 25
+  },
+  "2026/02/12": {
+    "number_of_sessions": 1,
+    "session_time": 279,
+    "streak": 45,
+    "xp_today": 24
+  },
+  "2026/02/13": {
+    "number_of_sessions": 1,
+    "session_time": 281,
+    "streak": 46,
+    "xp_today": 28
+  },
+  "2026/02/14": {
+    "number_of_sessions": 8,
+    "session_time": 2182,
+    "streak": 47,
+    "xp_today": 225
+  },
+  "2026/02/15": {
+    "number_of_sessions": 23,
+    "session_time": 4671,
+    "streak": 48,
+    "xp_today": 759
+  },
+  "2026/02/16": {
+    "number_of_sessions": 7,
+    "session_time": 1317,
+    "streak": 49,
+    "xp_today": 542
+  },
+  "2026/02/17": {
+    "number_of_sessions": 1,
+    "session_time": 276,
+    "streak": 50,
+    "xp_today": 84
+  },
+  "2026/02/18": {
+    "number_of_sessions": 1,
+    "session_time": 208,
+    "streak": 51,
+    "xp_today": 29
+  },
+  "2026/02/19": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 52,
+    "xp_today": 13
+  },
+  "2026/02/20": {
+    "number_of_sessions": 1,
+    "session_time": 148,
+    "streak": 53,
+    "xp_today": 30
+  },
+  "2026/02/21": {
+    "number_of_sessions": 3,
+    "session_time": 404,
+    "streak": 54,
+    "xp_today": 110
+  },
+  "2026/02/22": {
+    "number_of_sessions": 4,
+    "session_time": 346,
+    "streak": 55,
+    "xp_today": 104
+  },
+  "2026/02/23": {
+    "number_of_sessions": 2,
+    "session_time": 0,
+    "streak": 56,
+    "xp_today": 58
+  },
+  "2026/02/24": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 57,
+    "xp_today": 14
+  },
+  "2026/02/25": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 58,
+    "xp_today": 0
+  },
+  "2026/02/26": {
+    "number_of_sessions": 1,
+    "session_time": 210,
+    "streak": 59,
+    "xp_today": 60
+  },
+  "2026/02/27": {
+    "number_of_sessions": 3,
+    "session_time": 790,
+    "streak": 60,
+    "xp_today": 150
+  },
+  "2026/02/28": {
+    "number_of_sessions": 1,
+    "session_time": 215,
+    "streak": 61,
+    "xp_today": 90
+  },
+  "2026/03/01": {
+    "number_of_sessions": 6,
+    "session_time": 805,
+    "streak": 62,
+    "xp_today": 280
+  },
+  "2026/03/02": {
+    "number_of_sessions": 39,
+    "session_time": 419,
+    "streak": 63,
+    "xp_today": 755
+  },
+  "2026/03/03": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 64,
+    "xp_today": 39
+  },
+  "2026/03/04": {
+    "number_of_sessions": 2,
+    "session_time": 513,
+    "streak": 65,
+    "xp_today": 80
+  },
+  "2026/03/05": {
+    "number_of_sessions": 3,
+    "session_time": 180,
+    "streak": 66,
+    "xp_today": 58
+  },
+  "2026/03/06": {
+    "number_of_sessions": 1,
+    "session_time": 174,
+    "streak": 67,
+    "xp_today": 30
+  },
+  "2026/03/07": {
+    "number_of_sessions": 2,
+    "session_time": 265,
+    "streak": 68,
+    "xp_today": 28
+  },
+  "2026/03/08": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 69,
+    "xp_today": 0
+  },
+  "2026/03/09": {
+    "number_of_sessions": 1,
+    "session_time": 201,
+    "streak": 70,
+    "xp_today": 30
+  },
+  "2026/03/10": {
+    "number_of_sessions": 4,
+    "session_time": 522,
+    "streak": 71,
+    "xp_today": 80
+  },
+  "2026/03/11": {
+    "number_of_sessions": 3,
+    "session_time": 331,
+    "streak": 72,
+    "xp_today": 75
+  },
+  "2026/03/12": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 73,
+    "xp_today": 15
+  },
+  "2026/03/13": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 74,
+    "xp_today": 15
+  },
+  "2026/03/14": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 75,
+    "xp_today": 14
+  },
+  "2026/03/15": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 76,
+    "xp_today": 13
+  },
+  "2026/03/16": {
+    "number_of_sessions": 3,
+    "session_time": 875,
+    "streak": 77,
+    "xp_today": 135
+  },
+  "2026/03/17": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 78,
+    "xp_today": 0
+  },
+  "2026/03/18": {
+    "number_of_sessions": 2,
+    "session_time": 647,
+    "streak": 79,
+    "xp_today": 59
+  },
+  "2026/03/19": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 80,
+    "xp_today": 12
+  },
+  "2026/03/20": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 81,
+    "xp_today": 13
+  },
+  "2026/03/21": {
+    "number_of_sessions": 1,
+    "session_time": 135,
+    "streak": 82,
+    "xp_today": 29
+  },
+  "2026/03/22": {
+    "number_of_sessions": 1,
+    "session_time": 322,
+    "streak": 83,
+    "xp_today": 28
+  },
+  "2026/03/23": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 84,
+    "xp_today": 15
+  },
+  "2026/03/24": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 85,
+    "xp_today": 15
+  },
+  "2026/03/25": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 86,
+    "xp_today": 0
+  },
+  "2026/03/26": {
+    "number_of_sessions": 1,
+    "session_time": 259,
+    "streak": 87,
+    "xp_today": 35
+  },
+  "2026/03/27": {
+    "number_of_sessions": 1,
+    "session_time": 114,
+    "streak": 88,
+    "xp_today": 25
+  },
+  "2026/03/28": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 89,
+    "xp_today": 15
+  },
+  "2026/03/29": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 90,
+    "xp_today": 15
+  },
+  "2026/03/30": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 91,
+    "xp_today": 15
+  },
+  "2026/03/31": {
+    "number_of_sessions": 1,
+    "session_time": 479,
+    "streak": 92,
+    "xp_today": 20
+  },
+  "2026/04/01": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 93,
+    "xp_today": 0
+  },
+  "2026/04/02": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 94,
+    "xp_today": 15
+  },
+  "2026/04/03": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 95,
+    "xp_today": 13
+  },
+  "2026/04/04": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 96,
+    "xp_today": 14
+  },
+  "2026/04/05": {
+    "number_of_sessions": 1,
+    "session_time": 189,
+    "streak": 97,
+    "xp_today": 10
+  },
+  "2026/04/06": {
+    "number_of_sessions": 1,
+    "session_time": 150,
+    "streak": 98,
+    "xp_today": 10
+  },
+  "2026/04/07": {
+    "number_of_sessions": 1,
+    "session_time": 511,
+    "streak": 99,
+    "xp_today": 10
+  },
+  "2026/04/08": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 100,
+    "xp_today": 15
+  },
+  "2026/04/09": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 101,
+    "xp_today": 15
+  },
+  "2026/04/10": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 102,
+    "xp_today": 15
+  },
+  "2026/04/11": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 103,
+    "xp_today": 13
+  },
+  "2026/04/12": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 104,
+    "xp_today": 15
+  },
+  "2026/04/13": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 105,
+    "xp_today": 15
+  },
+  "2026/04/14": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 106,
+    "xp_today": 12
+  },
+  "2026/04/15": {
+    "number_of_sessions": 1,
+    "session_time": 262,
+    "streak": 107,
+    "xp_today": 30
+  },
+  "2026/04/16": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 108,
+    "xp_today": 14
+  },
+  "2026/04/17": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 109,
+    "xp_today": 15
+  },
+  "2026/04/18": {
+    "number_of_sessions": 1,
+    "session_time": 242,
+    "streak": 110,
+    "xp_today": 30
+  },
+  "2026/04/19": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 111,
+    "xp_today": 15
+  },
+  "2026/04/20": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 112,
+    "xp_today": 13
+  },
+  "2026/04/21": {
+    "number_of_sessions": 1,
+    "session_time": 319,
+    "streak": 113,
+    "xp_today": 28
+  },
+  "2026/04/22": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 114,
+    "xp_today": 0
+  },
+  "2026/04/23": {
+    "number_of_sessions": 1,
+    "session_time": 67,
+    "streak": 115,
+    "xp_today": 10
+  },
+  "2026/04/24": {
+    "number_of_sessions": 1,
+    "session_time": 371,
+    "streak": 116,
+    "xp_today": 29
+  },
+  "2026/04/25": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 117,
+    "xp_today": 13
+  },
+  "2026/04/26": {
+    "number_of_sessions": 4,
+    "session_time": 0,
+    "streak": 118,
+    "xp_today": 103
+  },
+  "2026/04/27": {
+    "number_of_sessions": 11,
+    "session_time": 665,
+    "streak": 119,
+    "xp_today": 249
+  },
+  "2026/04/28": {
+    "number_of_sessions": 4,
+    "session_time": 106,
+    "streak": 120,
+    "xp_today": 77
+  },
+  "2026/04/29": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 121,
+    "xp_today": 45
+  },
+  "2026/04/30": {
+    "number_of_sessions": 6,
+    "session_time": 0,
+    "streak": 122,
+    "xp_today": 248
+  },
+  "2026/05/01": {
+    "number_of_sessions": 4,
+    "session_time": 0,
+    "streak": 123,
+    "xp_today": 69
+  },
+  "2026/05/02": {
+    "number_of_sessions": 6,
+    "session_time": 291,
+    "streak": 124,
+    "xp_today": 235
+  },
+  "2026/05/03": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 125,
+    "xp_today": 135
+  },
+  "2026/05/04": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 126,
+    "xp_today": 75
+  },
+  "2026/05/05": {
+    "number_of_sessions": 4,
+    "session_time": 0,
+    "streak": 127,
+    "xp_today": 213
+  },
+  "2026/05/06": {
+    "number_of_sessions": 6,
+    "session_time": 52,
+    "streak": 128,
+    "xp_today": 89
+  },
+  "2026/05/07": {
+    "number_of_sessions": 6,
+    "session_time": 127,
+    "streak": 129,
+    "xp_today": 270
+  },
+  "2026/05/08": {
+    "number_of_sessions": 13,
+    "session_time": 1918,
+    "streak": 130,
+    "xp_today": 839
+  },
+  "2026/05/09": {
+    "number_of_sessions": 9,
+    "session_time": 1563,
+    "streak": 131,
+    "xp_today": 368
+  },
+  "2026/05/10": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 132,
+    "xp_today": 66
+  },
+  "2026/05/11": {
+    "number_of_sessions": 3,
+    "session_time": 0,
+    "streak": 133,
+    "xp_today": 45
+  },
+  "2026/05/12": {
+    "number_of_sessions": 6,
+    "session_time": 1648,
+    "streak": 134,
+    "xp_today": 217
+  },
+  "2026/05/13": {
+    "number_of_sessions": 6,
+    "session_time": 317,
+    "streak": 135,
+    "xp_today": 161
+  },
+  "2026/05/14": {
+    "number_of_sessions": 5,
+    "session_time": 463,
+    "streak": 136,
+    "xp_today": 162
+  }
+}

@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x, 24.x]
+        node-version: 24.x
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
       contents: write
     steps:
@@ -27,9 +29,17 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "requests>=2.32.3,<3.0.0" "pydantic>=2.7.4,<3.0.0"
 
+      - name: Ensure data directory and placeholder files
+        run: |
+          mkdir -p data
+          for f in duolingo-progress.json profile.json statistics.json; do
+            if [ ! -f "data/$f" ]; then
+              echo '{}' > "data/$f"
+            fi
+          done
+
       - name: Run Duolingo sync
         env:
-          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
           DUOLINGO_USERNAME: ${{ secrets.DUOLINGO_USERNAME }}
           DUOLINGO_JWT: ${{ secrets.DUOLINGO_JWT }}
           DUOLINGO_PASSWORD: ${{ secrets.DUOLINGO_PASSWORD }}

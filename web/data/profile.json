@@ -1,0 +1,21 @@
+{
+  "languages": [
+    {
+      "code": "ja",
+      "level": 12,
+      "name": "Japanese",
+      "streak": 129,
+      "xp": 12098
+    },
+    {
+      "code": "en",
+      "level": 130,
+      "name": "English",
+      "streak": 129,
+      "xp": 542
+    }
+  ],
+  "streak": 129,
+  "total_xp": 12640,
+  "username": "MussabO."
+}
