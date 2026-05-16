@@ -2,6 +2,9 @@
 name: Deploy static content to Pages
 
 on:
+  schedule:
+    # Runs at 00:00 on the 1st day of every month
+    - cron: "7 3 * * *" # Adjust the schedule as needed (this example runs at 03:07 UTC on the 1st of every month)
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
