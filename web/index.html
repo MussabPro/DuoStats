@@ -289,7 +289,7 @@
 
       .filters {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         margin-bottom: 16px;
       }
@@ -297,6 +297,7 @@
       .filter-group {
         display: flex;
         flex-direction: column;
+
         gap: 6px;
         font-size: 12px;
       }
@@ -318,12 +319,20 @@
 
       .filter-actions {
         display: flex;
+
         align-items: flex-end;
         gap: 8px;
       }
 
       .filter-actions button {
         cursor: pointer;
+        background-color: var(--xp);
+        border: 1px solid var(--border);
+        color: #fff;
+        font-weight: 600;
+        transition: background-color 0.2s;
+        border-radius: 10px;
+        padding: 8px 12px;
       }
 
       .summary {
@@ -493,35 +502,30 @@
             <label for="filter-end">End date</label>
             <input type="date" id="filter-end" />
           </div>
-          <div class="filter-group">
+          <div class="filter-group" style="display: none">
             <label for="filter-language">Language</label>
-            <select id="filter-language"></select>
+            <select id="filter-language">
+              <option value="">All languages</option>
+            </select>
           </div>
-          <div class="filter-group">
-            <label for="filter-min-xp">Min XP</label>
-            <input type="number" id="filter-min-xp" min="0" placeholder="0" />
-          </div>
-          <div class="filter-group">
-            <label for="filter-max-xp">Max XP</label>
-            <input type="number" id="filter-max-xp" min="0" placeholder="900" />
-          </div>
-          <div class="filter-group filter-actions">
-            <button id="filter-reset" type="button">Reset filters</button>
+          <div class="filter-actions">
+            <button id="filter-apply">Apply</button>
+            <button id="filter-reset">Reset</button>
           </div>
         </div>
 
         <div class="summary">
           <div class="summary-card">
-            <div>Total days</div>
-            <div class="summary-value" id="summary-days">0</div>
-          </div>
-          <div class="summary-card">
             <div>Total XP</div>
-            <div class="summary-value" id="summary-total-xp">0</div>
+            <div class="summary-value" id="summary-xp">0</div>
           </div>
           <div class="summary-card">
-            <div>Average XP</div>
-            <div class="summary-value" id="summary-average-xp">0</div>
+            <div>Sessions</div>
+            <div class="summary-value" id="summary-lessons">0</div>
+          </div>
+          <div class="summary-card">
+            <div>Time Spent</div>
+            <div class="summary-value" id="summary-time">0 min</div>
           </div>
         </div>
 
@@ -530,10 +534,9 @@
             <thead>
               <tr>
                 <th>Date</th>
-                <th>XP</th>
                 <th>Sessions</th>
-                <th>Minutes</th>
-                <th>Streak</th>
+                <th>XP</th>
+                <th>Time (min)</th>
               </tr>
             </thead>
             <tbody id="stats-table-body"></tbody>
@@ -541,400 +544,6 @@
         </div>
       </section>
     </main>
-
-    <!-- Personal Script -->
-    <script defer type="text/javascript">
-      /**
-       * @typedef Entry
-       * @type {object}
-       * @property {number} number_of_sessions
-       * @property {number} session_time
-       * @property {number} streak
-       * @property {number} xp_today
-       *
-       * @typedef Data
-       * @type {Object.<string, Entry>}
-       */
-
-      async function getJson(path) {
-        const response = await fetch(`data/${path}`);
-        if (!response.ok) return null;
-        return response.json();
-      }
-
-      function parseDateKey(key) {
-        const [year, month, day] = key.split("/").map(Number);
-        return new Date(year, month - 1, day);
-      }
-
-      function getWeeklyData(data, days) {
-        const sortedDates = Object.keys(data).sort(
-          (a, b) => parseDateKey(a) - parseDateKey(b),
-        );
-        const recentDates = sortedDates.slice(-days);
-        const values = recentDates.map((date) => data[date]);
-
-        return { dates: recentDates, values };
-      }
-
-      function renderLanguagesList(languages, selected) {
-        const languagesListElement = document.getElementById("languages-list");
-        if (!languagesListElement) return;
-
-        const filteredLanguages =
-          selected && selected !== "all"
-            ? languages.filter(
-                (language) =>
-                  language.code === selected || language.name === selected,
-              )
-            : languages;
-
-        const preferredOrder = ["Japanese", "English"];
-        const sortedLanguages = [...filteredLanguages]
-          .sort((a, b) => {
-            const aIndex = preferredOrder.indexOf(a.name || "");
-            const bIndex = preferredOrder.indexOf(b.name || "");
-            if (aIndex !== -1 || bIndex !== -1) {
-              return (
-                (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex)
-              );
-            }
-            return Number(b.xp || 0) - Number(a.xp || 0);
-          })
-          .slice(0, 5);
-
-        languagesListElement.innerHTML = sortedLanguages
-          .map((language) => {
-            const name = language.name || "Unknown";
-            const xp = Number(language.xp || 0).toLocaleString();
-            const level = Number(language.level || 0);
-            const fileName = `${name.replace(/\s+/g, "")}.svg`;
-            return `
-              <div class="language-card">
-                <img
-                  class="language-flag"
-                  src="Images/${fileName}"
-                  alt="${name} flag"
-                  loading="lazy"
-                />
-                <div>
-                  <div class="language-name">${name}</div>
-                  <div class="language-xp">Level ${level}</div>
-                </div>
-              </div>
-            `;
-          })
-          .join("");
-      }
-
-      function renderProfile(profile) {
-        if (!profile) return null;
-
-        const usernameElement = document.getElementById("profile-username");
-        const xpElement = document.getElementById("profile-xp");
-        const streakElement = document.getElementById("profile-streak");
-        const languageFlagsElement = document.getElementById(
-          "profile-language-flags",
-        );
-        const legendUsernameElement =
-          document.getElementById("legend-username");
-
-        const username = profile.username || "username";
-
-        if (usernameElement) {
-          usernameElement.textContent = `@${username}`;
-        }
-
-        if (legendUsernameElement) {
-          legendUsernameElement.textContent = username;
-        }
-
-        const languages = Array.isArray(profile.languages)
-          ? profile.languages
-          : [];
-        const activeLanguages = languages.filter(
-          (language) => Number(language.xp || 0) > 0,
-        );
-
-        if (xpElement) {
-          xpElement.textContent = Number(
-            profile.total_xp || 0,
-          ).toLocaleString();
-        }
-
-        if (streakElement) {
-          const streakValue = Number(profile.streak || 0);
-          streakElement.textContent = `${streakValue} day${
-            streakValue === 1 ? "" : "s"
-          }`;
-        }
-
-        if (languageFlagsElement) {
-          const orderedLanguages = [...activeLanguages].sort((a, b) => {
-            const preferredOrder = ["Japanese", "English"];
-            const aIndex = preferredOrder.indexOf(a.name || "");
-            const bIndex = preferredOrder.indexOf(b.name || "");
-            return (
-              (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex)
-            );
-          });
-          languageFlagsElement.innerHTML = orderedLanguages
-            .slice(0, 2)
-            .map((language) => {
-              const name = language.name || "Unknown";
-              const fileName = `${name.replace(/\s+/g, "")}.svg`;
-              return `<img class="pill-flag" src="Images/${fileName}" alt="${name} flag" />`;
-            })
-            .join("");
-        }
-
-        renderLanguagesList(activeLanguages, "all");
-
-        return null;
-      }
-
-      function renderWeeklyGraph(data) {
-        const lineElement = document.getElementById("weekly-line");
-        const dotsElement = document.getElementById("weekly-dots");
-        const labelsElement = document.getElementById("weekly-labels");
-        const legendTotalElement = document.getElementById("legend-total");
-
-        if (!lineElement || !dotsElement || !labelsElement) return null;
-
-        const weeklyData = getWeeklyData(data, 7);
-        const values = weeklyData.values.map((value) => value.xp_today || 0);
-        const maxValue = 900;
-        const chart = {
-          left: 40,
-          right: 340,
-          top: 20,
-          bottom: 140,
-        };
-        const step = (chart.right - chart.left) / 6;
-        const points = values.map((value, index) => {
-          const clamped = Math.min(value, maxValue);
-          const ratio = maxValue ? clamped / maxValue : 0;
-          const x = chart.left + step * index;
-          const y = chart.bottom - ratio * (chart.bottom - chart.top);
-          return { x, y };
-        });
-
-        lineElement.setAttribute(
-          "points",
-          points.map((point) => `${point.x},${point.y}`).join(" "),
-        );
-
-        dotsElement.innerHTML = points
-          .map(
-            (point) =>
-              `<circle cx="${point.x}" cy="${point.y}" r="3.5"></circle>`,
-          )
-          .join("");
-
-        labelsElement.innerHTML = weeklyData.dates
-          .map((date, index) => {
-            const dayLabel = parseDateKey(date)
-              .toLocaleDateString("en-US", { weekday: "short" })
-              .charAt(0);
-            const x = chart.left + step * index;
-            return `<text x="${x}" y="166" text-anchor="middle">${dayLabel}</text>`;
-          })
-          .join("");
-
-        if (legendTotalElement) {
-          const total = values.reduce((sum, value) => sum + value, 0);
-          legendTotalElement.textContent = `${total.toLocaleString()} XP`;
-        }
-
-        return null;
-      }
-
-      function buildProgressRows(data) {
-        return Object.entries(data)
-          .map(([date, entry]) => ({
-            date,
-            xp_today: Number(entry.xp_today || 0),
-            number_of_sessions: Number(entry.number_of_sessions || 0),
-            session_time: Number(entry.session_time || 0),
-            streak: Number(entry.streak || 0),
-          }))
-          .sort((a, b) => parseDateKey(a.date) - parseDateKey(b.date));
-      }
-
-      function formatDate(dateStr) {
-        const [year, month, day] = dateStr.split("/").map(Number);
-        const date = new Date(year, month - 1, day);
-        return date.toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
-      }
-
-      function renderTable(rows) {
-        const tableBody = document.getElementById("stats-table-body");
-        if (!tableBody) return;
-
-        tableBody.innerHTML = rows
-          .map((row) => {
-            const minutes = Math.round(row.session_time / 60);
-            return `
-              <tr>
-                <td>${formatDate(row.date)}</td>
-                <td>${row.xp_today}</td>
-                <td>${row.number_of_sessions}</td>
-                <td>${minutes}</td>
-                <td>${row.streak}</td>
-              </tr>
-            `;
-          })
-          .join("");
-      }
-
-      function renderSummary(rows) {
-        const daysElement = document.getElementById("summary-days");
-        const totalXpElement = document.getElementById("summary-total-xp");
-        const averageXpElement = document.getElementById("summary-average-xp");
-        const totalXp = rows.reduce((sum, row) => sum + row.xp_today, 0);
-        const averageXp = rows.length ? totalXp / rows.length : 0;
-
-        if (daysElement) daysElement.textContent = rows.length.toString();
-        if (totalXpElement)
-          totalXpElement.textContent = totalXp.toLocaleString();
-        if (averageXpElement)
-          averageXpElement.textContent = Math.round(averageXp).toString();
-      }
-
-      function setupFilters(rows, profile) {
-        const startInput = document.getElementById("filter-start");
-        const endInput = document.getElementById("filter-end");
-        const minXpInput = document.getElementById("filter-min-xp");
-        const maxXpInput = document.getElementById("filter-max-xp");
-        const languageSelect = document.getElementById("filter-language");
-        const resetButton = document.getElementById("filter-reset");
-
-        if (languageSelect) {
-          const languages = Array.isArray(profile?.languages)
-            ? profile.languages
-            : [];
-          const activeLanguages = languages.filter(
-            (language) => Number(language.xp || 0) > 0,
-          );
-          const options = [
-            { value: "all", label: "All languages" },
-            ...activeLanguages.map((language) => ({
-              value: language.code || language.name || "",
-              label: language.name || "Unknown",
-            })),
-          ];
-          languageSelect.innerHTML = options
-            .map(
-              (option) =>
-                `<option value="${option.value}">${option.label}</option>`,
-            )
-            .join("");
-        }
-
-        const applyFilters = () => {
-          let filtered = [...rows];
-
-          if (startInput?.value) {
-            const startDate = new Date(startInput.value);
-            filtered = filtered.filter(
-              (row) => parseDateKey(row.date) >= startDate,
-            );
-          }
-
-          if (endInput?.value) {
-            const endDate = new Date(endInput.value);
-            filtered = filtered.filter(
-              (row) => parseDateKey(row.date) <= endDate,
-            );
-          }
-
-          const minXp = Number(minXpInput?.value || 0);
-          if (minXp) {
-            filtered = filtered.filter((row) => row.xp_today >= minXp);
-          }
-
-          const maxXp = Number(maxXpInput?.value || 0);
-          if (maxXp) {
-            filtered = filtered.filter((row) => row.xp_today <= maxXp);
-          }
-
-          renderTable(filtered);
-          renderSummary(filtered);
-        };
-
-        startInput?.addEventListener("change", applyFilters);
-        endInput?.addEventListener("change", applyFilters);
-        minXpInput?.addEventListener("input", applyFilters);
-        maxXpInput?.addEventListener("input", applyFilters);
-
-        languageSelect?.addEventListener("change", () => {
-          const languages = Array.isArray(profile?.languages)
-            ? profile.languages
-            : [];
-          const activeLanguages = languages.filter(
-            (language) => Number(language.xp || 0) > 0,
-          );
-          renderLanguagesList(activeLanguages, languageSelect.value);
-        });
-
-        resetButton?.addEventListener("click", () => {
-          if (startInput) startInput.value = "";
-          if (endInput) endInput.value = "";
-          if (minXpInput) minXpInput.value = "";
-          if (maxXpInput) maxXpInput.value = "";
-          if (languageSelect) languageSelect.value = "all";
-          applyFilters();
-          const languages = Array.isArray(profile?.languages)
-            ? profile.languages
-            : [];
-          const activeLanguages = languages.filter(
-            (language) => Number(language.xp || 0) > 0,
-          );
-          renderLanguagesList(activeLanguages, "all");
-        });
-
-        applyFilters();
-      }
-
-      /**
-       * Bootstraps the whole DOM and renders the graphs for you. These functions are
-       * not pure and side effects are to be expected: network JSON request and several DOM rendering
-       * processes. We make sure that `data` exists to prevent unwanted errors.
-       */
-      async function bootstrap() {
-        const [progressData, profileData] = await Promise.all([
-          getJson("duolingo-progress.json"),
-          getJson("profile.json"),
-        ]);
-
-        if (!progressData) return null;
-
-        const rows = buildProgressRows(progressData);
-
-        renderProfile(profileData);
-        renderWeeklyGraph(progressData);
-        renderTable(rows);
-        renderSummary(rows);
-        setupFilters(rows, profileData);
-
-        return null;
-      }
-
-      /**
-       * Runner.
-       */
-      bootstrap()
-        .then(() => {
-          console.log("Website has finished rendering your Duolingo data.");
-        })
-        .catch((err) => {
-          console.error("An error ocurred. Please refresh the page!");
-          console.error(err);
-        });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

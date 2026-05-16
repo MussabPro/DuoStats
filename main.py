@@ -262,6 +262,7 @@ def run() -> tuple[bool, bool]:
 
     # Transform them into our internal schema.
     user = User(**raw_user)
+
     summaries = [Summary(**summary) for summary in raw_summary["summaries"]]
     profile = build_profile(raw_user, user)
 
