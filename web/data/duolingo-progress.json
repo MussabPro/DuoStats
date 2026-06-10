@@ -964,5 +964,11 @@
     "session_time": 355,
     "streak": 161,
     "xp_today": 118
+  },
+  "2026/06/09": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 162,
+    "xp_today": 15
   }
 }
