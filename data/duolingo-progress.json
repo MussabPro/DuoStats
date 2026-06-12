@@ -976,5 +976,17 @@
     "session_time": 0,
     "streak": 163,
     "xp_today": 15
+  },
+  "2026/06/11": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 164,
+    "xp_today": 0
+  },
+  "2026/06/12": {
+    "number_of_sessions": 1,
+    "session_time": 0,
+    "streak": 165,
+    "xp_today": 12
   }
 }
