@@ -1212,9 +1212,9 @@
     "xp_today": 25
   },
   "2026/07/20": {
-    "number_of_sessions": 0,
-    "session_time": 0,
+    "number_of_sessions": 1,
+    "session_time": 126,
     "streak": 203,
-    "xp_today": 0
+    "xp_today": 25
   }
 }
