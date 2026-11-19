@@ -1936,5 +1936,17 @@
     "session_time": 1164,
     "streak": 323,
     "xp_today": 278
+  },
+  "2026/11/18": {
+    "number_of_sessions": 0,
+    "session_time": 0,
+    "streak": 324,
+    "xp_today": 0
+  },
+  "2026/11/19": {
+    "number_of_sessions": 1,
+    "session_time": 273,
+    "streak": 325,
+    "xp_today": 41
   }
 }
