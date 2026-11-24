@@ -4,32 +4,32 @@
       "code": "ja",
       "level": 0,
       "name": "Japanese",
-      "streak": 300,
-      "xp": 36707
+      "streak": 301,
+      "xp": 36721
     },
     {
       "code": "en",
       "level": 0,
       "name": "English",
-      "streak": 300,
+      "streak": 301,
       "xp": 685
     },
     {
       "code": "de",
       "level": 0,
       "name": "German",
-      "streak": 300,
+      "streak": 301,
       "xp": 25
     },
     {
       "code": "zs",
       "level": 0,
       "name": "Chinese (Simplified)",
-      "streak": 300,
+      "streak": 301,
       "xp": 202
     }
   ],
-  "streak": 300,
-  "total_xp": 37619,
+  "streak": 301,
+  "total_xp": 37633,
   "username": "MussabO."
 }
